@@ -17,3 +17,7 @@ class Urls:
     RESET_PASSWORD = "https://stellarburgers.nomoreparties.site/reset-password"
     LOGIN_PAGE = "https://stellarburgers.nomoreparties.site/login"
     HISTORY_ORDERS = "https://stellarburgers.nomoreparties.site/account/order-history"
+
+class EndPoints:
+    CREATE_USER = "api/auth/register"
+    GET_AND_DELETE_USER = "api/auth/user"

@@ -1,4 +1,3 @@
-'''
 from data import Urls
 
 class TestForgotPassword:
@@ -14,4 +13,3 @@ class TestForgotPassword:
     def test_click_show_hide_password_btn(self, fill_email_and_recovery):
 
         assert fill_email_and_recovery.click_show_hide_password_btn() == "text"
-'''
