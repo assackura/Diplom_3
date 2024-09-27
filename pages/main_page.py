@@ -24,3 +24,12 @@ class MainPage(BasePage):
         self.click_ing_bun()
         self.wait_and_find_element(MainPageLocators.CLOSE_BTN_DETAIL_ING).click()
         return self.find_invisible_element(MainPageLocators.H2_BUN_TITLE)
+
+    def add_ing(self):
+        self.drag_and_drop_element(MainPageLocators.ING_BUN, MainPageLocators.BASKET_TOP)
+        return self.wait_and_find_element(MainPageLocators.COUNTER_BUN)
+
+    def create_new_order(self):
+        self.add_ing()
+        self.wait_and_find_element(MainPageLocators.BUTTON_CREATE_ORDER).click()
+        return self.wait_and_find_element(MainPageLocators.MODAL_ORDER_START)

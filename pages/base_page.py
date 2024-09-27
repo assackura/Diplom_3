@@ -1,3 +1,5 @@
+import time
+
 import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
@@ -28,7 +30,9 @@ class BasePage:
     def drag_and_drop_element(self, locator, target):
         drag = self.wait_and_find_element(locator)
         drop = self.wait_and_find_element(target)
-        ActionChains(self.driver).drag_and_drop(drag, drop).perform()
+        ac = ActionChains(self.driver)
+        ac.drag_and_drop(drag, drop).perform()
+        time.sleep(5)
 
     @allure.step('Открываем страницу')
     def open_page(self, url):

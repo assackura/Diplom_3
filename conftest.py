@@ -1,4 +1,5 @@
 import pytest
+from selenium.webdriver.chrome.options import Options
 
 from api.user import User
 from data import Urls
@@ -9,12 +10,14 @@ from pages.login_page import LoginPage
 from pages.main_page import MainPage
 
 
-#@pytest.fixture(params=['firefox', 'chrome'])
+#@pytest.fixture(params=['firefox'])
 @pytest.fixture(params=['chrome'])
 def driver(request):
     browser = None
     if request.param == 'chrome':
-        browser = webdriver.Chrome()
+        options = Options()
+        options.add_argument("--window-position=-2400,-2400")
+        browser = webdriver.Chrome(options=options)
     elif request.param == 'firefox':
         browser = webdriver.Firefox()
     else:
@@ -68,7 +71,6 @@ def login_auth(login_page, user_delete_after_test):
     return login_page
 
 @pytest.fixture(scope='function')
-def main_page(driver):
-    main = MainPage(driver)
-    main.open_page(Urls.MAIN_PAGE)
+def main_page(login_auth):
+    main = MainPage(login_auth.driver)
     return main
