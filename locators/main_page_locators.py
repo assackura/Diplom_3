@@ -10,3 +10,4 @@ class MainPageLocators:
     COUNTER_BUN = (By.XPATH, ".//p[text()='Флюоресцентная булка R2-D3']/parent::a/div[contains(@class, 'counter')]/p")
     MODAL_ORDER_START = (By.XPATH, ".//p[text()='Ваш заказ начали готовить']")
     BUTTON_CREATE_ORDER = (By.XPATH, ".//button[text()='Оформить заказ']")
+    H1_CONSTRUCTOR_BURGER = (By.XPATH, ".//h1[text()='Соберите бургер']")

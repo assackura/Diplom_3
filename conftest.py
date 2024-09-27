@@ -5,19 +5,18 @@ from api.user import User
 from data import Urls
 from selenium import webdriver
 from generators import UserGenerator
+from pages.feed_page import FeedPage
 from pages.forgot_password_page import ForgotPasswordPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 
 
-#@pytest.fixture(params=['firefox'])
-@pytest.fixture(params=['chrome'])
+@pytest.fixture(params=['firefox'])
+#@pytest.fixture(params=['chrome'])
 def driver(request):
     browser = None
     if request.param == 'chrome':
-        options = Options()
-        options.add_argument("--window-position=-2400,-2400")
-        browser = webdriver.Chrome(options=options)
+        browser = webdriver.Chrome()
     elif request.param == 'firefox':
         browser = webdriver.Firefox()
     else:
@@ -74,3 +73,10 @@ def login_auth(login_page, user_delete_after_test):
 def main_page(login_auth):
     main = MainPage(login_auth.driver)
     return main
+
+@pytest.fixture(scope='function')
+def feed_page(driver):
+    feed = FeedPage(driver)
+    feed.open_page(Urls.MAIN_PAGE)
+    return feed
+

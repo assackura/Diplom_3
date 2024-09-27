@@ -1,4 +1,5 @@
 from locators.base_page_locators import BasePageLocators
+from locators.feed_page_locators import FeedPageLocators
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
 
@@ -10,11 +11,11 @@ class MainPage(BasePage):
 
     def constructor_click(self):
         self.wait_and_find_element(BasePageLocators.CONSTRUCTOR_LINK).click()
-        return self.wait_and_find_element(BasePageLocators.H1_CONSTRUCTOR_BURGER)
+        return self.wait_and_find_element(MainPageLocators.H1_CONSTRUCTOR_BURGER)
 
     def order_feed_click(self):
         self.wait_and_find_element(BasePageLocators.ORDER_FEED_LINK).click()
-        return self.wait_and_find_element(BasePageLocators.H1_ORDER_FEED)
+        return self.wait_and_find_element(FeedPageLocators.H1_ORDER_FEED)
 
     def click_ing_bun(self):
         self.wait_and_find_element(MainPageLocators.ING_BUN).click()
