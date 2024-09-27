@@ -39,7 +39,6 @@ def fill_email_and_recovery(forgot_page):
 def login_page(driver):
     login = LoginPage(driver)
     login.open_page(Urls.MAIN_PAGE)
-    login.click_personal_area_link()
     return login
 
 @pytest.fixture(scope='function')
