@@ -6,6 +6,7 @@ from selenium import webdriver
 from generators import UserGenerator
 from pages.forgot_password_page import ForgotPasswordPage
 from pages.login_page import LoginPage
+from pages.main_page import MainPage
 
 
 #@pytest.fixture(params=['firefox', 'chrome'])
@@ -18,6 +19,7 @@ def driver(request):
         browser = webdriver.Firefox()
     else:
         raise Exception(f"Браузер {request.param} не поддерживается")
+    browser.set_window_size(1920, 1080)
     yield browser
 
     browser.quit()
@@ -26,14 +28,13 @@ def driver(request):
 def forgot_page(driver):
     forgot_pwd = ForgotPasswordPage(driver)
     forgot_pwd.open_page(Urls.MAIN_PAGE)
-    forgot_pwd.click_recovery_password()
     return forgot_pwd
 
 @pytest.fixture(scope='function')
 def fill_email_and_recovery(forgot_page):
     generator = UserGenerator()
-    forgot_page.fill_email_and_click_recovery(generator.generate_random_email())
-    return forgot_page
+    forgot_page.click_recovery_password()
+    return forgot_page, generator.generate_random_email()
 
 @pytest.fixture(scope='function')
 def login_page(driver):
@@ -65,3 +66,9 @@ def login_auth(login_page, user_delete_after_test):
     login_page.click_personal_area_link()
     login_page.login_user(user_delete_after_test[1]["email"], user_delete_after_test[1]["password"])
     return login_page
+
+@pytest.fixture(scope='function')
+def main_page(driver):
+    main = MainPage(driver)
+    main.open_page(Urls.MAIN_PAGE)
+    return main

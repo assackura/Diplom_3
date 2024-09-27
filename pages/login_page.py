@@ -1,9 +1,6 @@
 from locators.account_page_locators import AccountPageLocators
 from locators.base_page_locators import BasePageLocators
-from locators.forgot_password_locators import ForgotPasswordLocators
 from locators.login_page_locators import LoginPageLocators
-from locators.register_page_locators import RegisterPageLocators
-from locators.reset_page_locators import ResetPageLocators
 from pages.base_page import BasePage
 
 

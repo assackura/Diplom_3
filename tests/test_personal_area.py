@@ -1,6 +1,3 @@
-from data import Urls
-
-
 class TestPersonalArea:
 
     def test_click_personal_area_link(self, login_page):
