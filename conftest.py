@@ -1,4 +1,5 @@
 import pytest
+from selenium.webdriver.chrome.options import Options
 
 from api.user import User
 from data import Urls
@@ -10,12 +11,14 @@ from pages.login_page import LoginPage
 from pages.main_page import MainPage
 
 
-@pytest.fixture(params=['firefox'])
+@pytest.fixture(params=['chrome', 'firefox'])
 #@pytest.fixture(params=['chrome'])
 def driver(request):
     browser = None
     if request.param == 'chrome':
-        browser = webdriver.Chrome()
+        options = Options()
+        options.add_argument("--headless=old")
+        browser = webdriver.Chrome(options)
     elif request.param == 'firefox':
         browser = webdriver.Firefox()
     else:
