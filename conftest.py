@@ -11,8 +11,8 @@ from pages.login_page import LoginPage
 from pages.main_page import MainPage
 
 
-@pytest.fixture(params=['firefox'])
-#@pytest.fixture(params=['chrome'])
+#@pytest.fixture(params=['firefox'])
+@pytest.fixture(params=['chrome'])
 def driver(request):
     browser = None
     if request.param == 'chrome':
