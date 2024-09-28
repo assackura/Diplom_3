@@ -1,7 +1,4 @@
-import time
-
 import allure
-from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,6 +7,7 @@ from data import GetConfig
 from locators.base_page_locators import BasePageLocators
 from locators.login_page_locators import LoginPageLocators
 from locators.main_page_locators import MainPageLocators
+from seletools.actions import drag_and_drop
 
 
 class BasePage:
@@ -39,9 +37,7 @@ class BasePage:
     def drag_and_drop_element(self, locator, target):
         drag = self.wait_and_find_element(locator)
         drop = self.wait_and_find_element(target)
-        ac = ActionChains(self.driver)
-        ac.drag_and_drop(drag, drop).perform()
-        time.sleep(5)
+        drag_and_drop(self.driver, drag, drop)
 
     @allure.step('Открываем страницу')
     def open_page(self, url):
@@ -66,6 +62,7 @@ class BasePage:
         self.fill_element(LoginPageLocators.INPUT_PASSWORD_LOGIN, password)
         self.fill_element(LoginPageLocators.INPUT_EMAIL_LOGIN, email)
         self.click_element(LoginPageLocators.BUTTON_LOGIN)
+        self.wait_and_find_element(MainPageLocators.BUTTON_CREATE_ORDER)
 
     @allure.step('Добавляем ингредиент')
     def add_ing(self, locator):

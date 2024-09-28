@@ -11,3 +11,4 @@ class MainPageLocators:
     MODAL_ORDER_START = (By.XPATH, ".//p[text()='Ваш заказ начали готовить']")
     BUTTON_CREATE_ORDER = (By.XPATH, ".//button[text()='Оформить заказ']")
     H1_CONSTRUCTOR_BURGER = (By.XPATH, ".//h1[text()='Соберите бургер']")
+    ID_ORDER = (By.XPATH, ".//h2[contains(@class, 'Modal_modal__title_shadow')]")
