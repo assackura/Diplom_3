@@ -12,7 +12,6 @@ from pages.main_page import MainPage
 
 
 @pytest.fixture(params=['chrome', 'firefox'])
-#@pytest.fixture(params=['chrome'])
 def driver(request):
     browser = None
     if request.param == 'chrome':
