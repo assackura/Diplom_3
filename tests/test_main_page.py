@@ -18,9 +18,9 @@ class TestMainPage:
 
     def test_up_counter_ing_add_ing(self, main_page):
 
-        assert int(main_page.add_ing().text) > 0
+        assert int(main_page.up_counter_ing().text) > 0
 
-    def test_auth_user_create_new_order(self, main_page):
+    def test_auth_user_create_new_order(self, main_auth):
 
-        assert main_page.create_new_order().is_displayed()
+        assert main_auth.create_new_order().is_displayed()
 

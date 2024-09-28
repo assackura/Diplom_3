@@ -27,24 +27,6 @@ def driver(request):
     browser.quit()
 
 @pytest.fixture(scope='function')
-def forgot_page(driver):
-    forgot_pwd = ForgotPasswordPage(driver)
-    forgot_pwd.open_page(Urls.MAIN_PAGE)
-    return forgot_pwd
-
-@pytest.fixture(scope='function')
-def fill_email_and_recovery(forgot_page):
-    generator = UserGenerator()
-    forgot_page.click_recovery_password()
-    return forgot_page, generator.generate_random_email()
-
-@pytest.fixture(scope='function')
-def login_page(driver):
-    login = LoginPage(driver)
-    login.open_page(Urls.MAIN_PAGE)
-    return login
-
-@pytest.fixture(scope='function')
 def new_user_data():
     generator = UserGenerator()
     user_data = {
@@ -64,15 +46,38 @@ def user_delete_after_test(new_user_data):
     user.delete_user(response.json()["accessToken"])
 
 @pytest.fixture(scope='function')
+def forgot_page(driver):
+    forgot_pwd = ForgotPasswordPage(driver)
+    forgot_pwd.open_page(Urls.MAIN_PAGE)
+    return forgot_pwd
+
+@pytest.fixture(scope='function')
+def fill_email_and_recovery(forgot_page):
+    generator = UserGenerator()
+    forgot_page.click_recovery_password()
+    return forgot_page, generator.generate_random_email()
+
+@pytest.fixture(scope='function')
+def login_page(driver):
+    login = LoginPage(driver)
+    login.open_page(Urls.MAIN_PAGE)
+    return login
+
+@pytest.fixture(scope='function')
 def login_auth(login_page, user_delete_after_test):
-    login_page.click_personal_area_link()
     login_page.login_user(user_delete_after_test[1]["email"], user_delete_after_test[1]["password"])
     return login_page
 
 @pytest.fixture(scope='function')
-def main_page(login_auth):
-    main = MainPage(login_auth.driver)
+def main_page(driver):
+    main = MainPage(driver)
+    main.open_page(Urls.MAIN_PAGE)
     return main
+
+@pytest.fixture(scope='function')
+def main_auth(main_page, user_delete_after_test):
+    main_page.login_user(user_delete_after_test[1]["email"], user_delete_after_test[1]["password"])
+    return main_page
 
 @pytest.fixture(scope='function')
 def feed_page(driver):
@@ -80,3 +85,7 @@ def feed_page(driver):
     feed.open_page(Urls.MAIN_PAGE)
     return feed
 
+@pytest.fixture(scope='function')
+def feed_auth(feed_page, user_delete_after_test):
+    feed_page.login_user(user_delete_after_test[1]["email"], user_delete_after_test[1]["password"])
+    return feed_page

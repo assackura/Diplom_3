@@ -11,16 +11,14 @@ class ForgotPasswordPage(BasePage):
         super().__init__(driver)
 
     def click_recovery_password(self):
-        self.wait_and_find_element(BasePageLocators.PERSONAL_AREA_LINK).click()
-        self.wait_and_find_element(LoginPageLocators.FORGOT_PWD_LINK).click()
+        self.click_element(BasePageLocators.PERSONAL_AREA_LINK, LoginPageLocators.FORGOT_PWD_LINK)
         return self.wait_and_find_element(ForgotPasswordLocators.BUTTON_RESTORE)
 
     def fill_email_and_click_recovery(self, email):
-        self.wait_and_find_element(ForgotPasswordLocators.INPUT_EMAIL).send_keys(email)
-        self.wait_and_find_element(ForgotPasswordLocators.BUTTON_RESTORE).click()
+        self.fill_element(ForgotPasswordLocators.INPUT_EMAIL, email)
+        self.click_element(ForgotPasswordLocators.BUTTON_RESTORE)
         return self.wait_and_find_element(ResetPageLocators.SAVE_BTN)
 
     def click_show_hide_password_btn(self):
-        btn = self.wait_and_find_element(ForgotPasswordLocators.DIV_ACTION_SHOW_PASSWORD)
-        self.driver.execute_script("arguments[0].click()", btn)
+        self.click_element(ForgotPasswordLocators.DIV_ACTION_SHOW_PASSWORD)
         return self.wait_and_find_element(ForgotPasswordLocators.INPUT_RESET_PASSWORD).get_property("type")
