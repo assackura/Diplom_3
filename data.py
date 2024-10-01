@@ -11,10 +11,10 @@ class GetConfig:
 class Urls:
 
     MAIN_PAGE = "https://stellarburgers.nomoreparties.site/"
-    FORGOT_PASSWORD = "https://stellarburgers.nomoreparties.site/forgot-password"
-    RESET_PASSWORD = "https://stellarburgers.nomoreparties.site/reset-password"
-    LOGIN_PAGE = "https://stellarburgers.nomoreparties.site/login"
-    HISTORY_ORDERS = "https://stellarburgers.nomoreparties.site/account/order-history"
+    FORGOT_PASSWORD = f"{MAIN_PAGE}forgot-password"
+    RESET_PASSWORD = f"{MAIN_PAGE}reset-password"
+    LOGIN_PAGE = f"{MAIN_PAGE}login"
+    HISTORY_ORDERS = f"{MAIN_PAGE}account/order-history"
 
 class EndPoints:
     CREATE_USER = "api/auth/register"

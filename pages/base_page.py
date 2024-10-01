@@ -5,8 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from data import GetConfig
 from locators.base_page_locators import BasePageLocators
-from locators.login_page_locators import LoginPageLocators
-from locators.main_page_locators import MainPageLocators
 from seletools.actions import drag_and_drop
 
 
@@ -59,16 +57,16 @@ class BasePage:
     @allure.step('Авторизуем пользователя')
     def login_user(self, email, password):
         self.click_element(BasePageLocators.PERSONAL_AREA_LINK)
-        self.fill_element(LoginPageLocators.INPUT_PASSWORD_LOGIN, password)
-        self.fill_element(LoginPageLocators.INPUT_EMAIL_LOGIN, email)
-        self.click_element(LoginPageLocators.BUTTON_LOGIN)
-        self.wait_and_find_element(MainPageLocators.BUTTON_CREATE_ORDER)
+        self.fill_element(BasePageLocators.INPUT_PASSWORD_LOGIN, password)
+        self.fill_element(BasePageLocators.INPUT_EMAIL_LOGIN, email)
+        self.click_element(BasePageLocators.BUTTON_LOGIN)
+        self.wait_and_find_element(BasePageLocators.BUTTON_CREATE_ORDER)
 
     @allure.step('Добавляем ингредиент')
     def add_ing(self, locator):
-        self.drag_and_drop_element(locator, MainPageLocators.BASKET_TOP)
+        self.drag_and_drop_element(locator, BasePageLocators.BASKET_TOP)
 
     @allure.step('Создаем новый заказ')
     def create_order(self, locator):
         self.add_ing(locator)
-        self.click_element(MainPageLocators.BUTTON_CREATE_ORDER)
+        self.click_element(BasePageLocators.BUTTON_CREATE_ORDER)

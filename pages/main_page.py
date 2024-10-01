@@ -1,5 +1,3 @@
-from locators.base_page_locators import BasePageLocators
-from locators.feed_page_locators import FeedPageLocators
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
 import allure
@@ -12,13 +10,13 @@ class MainPage(BasePage):
 
     @allure.step('Кликаем по ссылке "Конструктор"')
     def constructor_click(self):
-        self.click_element(BasePageLocators.CONSTRUCTOR_LINK)
+        self.click_element(MainPageLocators.CONSTRUCTOR_LINK)
         return self.wait_and_find_element(MainPageLocators.H1_CONSTRUCTOR_BURGER)
 
     @allure.step('Кликаем по ссылке "Лента заказов"')
     def order_feed_click(self):
-        self.click_element(BasePageLocators.ORDER_FEED_LINK)
-        return self.wait_and_find_element(FeedPageLocators.H1_ORDER_FEED)
+        self.click_element(MainPageLocators.ORDER_FEED_LINK)
+        return self.wait_and_find_element(MainPageLocators.H1_ORDER_FEED)
 
     @allure.step('Кликаем по ингредиенту')
     def click_ing_bun(self):
